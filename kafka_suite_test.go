@@ -1,7 +1,7 @@
 package kafka_wrapper_test
 
 import (
-	"github.com/Trendyol/kafka-wrapper/internal/integrationcontainers/kafka"
+	"github.com/ferzend/kafka-wrapper/internal/integrationcontainers/kafka"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"testing"

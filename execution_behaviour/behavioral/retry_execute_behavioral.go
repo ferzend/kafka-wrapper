@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/Trendyol/kafka-wrapper"
+	"github.com/ferzend/kafka-wrapper"
 	"time"
 )
 

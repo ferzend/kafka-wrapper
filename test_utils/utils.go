@@ -2,7 +2,7 @@ package test_utils
 
 import (
 	"github.com/Shopify/sarama"
-	"github.com/Trendyol/kafka-wrapper"
+	"github.com/ferzend/kafka-wrapper"
 	. "github.com/onsi/ginkgo"
 	"github.com/parnurzeal/gorequest"
 	"sync"

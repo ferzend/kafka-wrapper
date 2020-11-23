@@ -2,8 +2,8 @@ package kafka_wrapper_test
 
 import (
 	"github.com/Shopify/sarama"
-	"github.com/Trendyol/kafka-wrapper"
-	"github.com/Trendyol/kafka-wrapper/test_utils"
+	"github.com/ferzend/kafka-wrapper"
+	"github.com/ferzend/kafka-wrapper/test_utils"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"time"

@@ -3,7 +3,7 @@ package behavioral
 import (
 	"context"
 	"github.com/Shopify/sarama"
-	"github.com/Trendyol/kafka-wrapper"
+	"github.com/ferzend/kafka-wrapper"
 )
 
 type normalBehaviour struct {

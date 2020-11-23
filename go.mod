@@ -1,4 +1,4 @@
-module github.com/Trendyol/kafka-wrapper
+module github.com/ferzend/kafka-wrapper
 
 go 1.14
 

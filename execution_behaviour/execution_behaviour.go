@@ -2,7 +2,7 @@ package execution_behaviour
 
 import (
 	"github.com/Shopify/sarama"
-	"github.com/Trendyol/kafka-wrapper/execution_behaviour/behavioral"
+	"github.com/ferzend/kafka-wrapper/execution_behaviour/behavioral"
 )
 
 type BehavioralSelector interface {
