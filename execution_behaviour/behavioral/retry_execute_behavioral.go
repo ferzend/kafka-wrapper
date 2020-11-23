@@ -27,8 +27,8 @@ func RetryBehavioral(producer sarama.SyncProducer, errorTopic string, executor L
 	}
 }
 
-func (k *retryBehaviour) Process(ctx context.Context, message *sarama.ConsumerMessage) (err error) {
-
+func (k *retryBehaviour) Process(ctx context.Context, message *sarama.ConsumerMessage) (*sarama.ConsumerMessage, error) {
+	var err error
 	for i := 0; i < k.retryCount; i++ {
 		if i == 0 {
 			latestExecutableTime := time.Now().Add(time.Duration(-5) * time.Second)
@@ -44,7 +44,7 @@ func (k *retryBehaviour) Process(ctx context.Context, message *sarama.ConsumerMe
 			time.Sleep(250 * time.Millisecond)
 		}
 
-		err = k.executor.Operate(ctx, message)
+		message, err = k.executor.Operate(ctx, message)
 		if err == nil {
 			kafka_wrapper.Logger.Printf("Message is executed successfully, message: %+v\n", string(message.Value))
 			break
@@ -56,11 +56,11 @@ func (k *retryBehaviour) Process(ctx context.Context, message *sarama.ConsumerMe
 		err = k.sendToErrorTopic(message, k.errorTopic, err.Error())
 		if err != nil {
 			kafka_wrapper.Logger.Printf("Message is not published to error topic: %+v\n", k.errorTopic)
-			return err
+			return message, err
 		}
 	}
 
-	return nil
+	return message, nil
 }
 
 func (k *retryBehaviour) sendToErrorTopic(message *sarama.ConsumerMessage, errorTopic string, errorMessage string) error {

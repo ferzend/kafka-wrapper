@@ -20,15 +20,16 @@ func NormalBehavioral(producer sarama.SyncProducer, retryTopic string, executor 
 	}
 }
 
-func (k *normalBehaviour) Process(ctx context.Context, message *sarama.ConsumerMessage) (err error) {
-	if err = k.executor.Operate(ctx, message); err != nil {
+func (k *normalBehaviour) Process(ctx context.Context, message *sarama.ConsumerMessage) (*sarama.ConsumerMessage, error) {
+	var err error
+	if message, err = k.executor.Operate(ctx, message); err != nil {
 		kafka_wrapper.Logger.Printf("Have an error occurred while executing the logic: %+v, err:%+v\n", message.Topic, err)
 		err = k.sendToRetryTopic(message)
 		if err != nil {
 			kafka_wrapper.Logger.Printf("Have an error occurred while publishing to retry topic: %+v , err:%+v\n", k.retryTopic, err)
 		}
 	}
-	return err
+	return message, err
 }
 
 func (k *normalBehaviour) sendToRetryTopic(message *sarama.ConsumerMessage) error {

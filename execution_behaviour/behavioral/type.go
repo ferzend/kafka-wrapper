@@ -6,5 +6,5 @@ import (
 )
 
 type BehaviourExecutor interface {
-	Process(ctx context.Context, message *sarama.ConsumerMessage) error
+	Process(ctx context.Context, message *sarama.ConsumerMessage) (*sarama.ConsumerMessage, error)
 }

@@ -6,5 +6,5 @@ import (
 )
 
 type LogicOperator interface {
-	Operate(ctx context.Context, message *sarama.ConsumerMessage) error
+	Operate(ctx context.Context, message *sarama.ConsumerMessage) (*sarama.ConsumerMessage, error)
 }

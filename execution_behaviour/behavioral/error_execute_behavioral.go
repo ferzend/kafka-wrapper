@@ -15,6 +15,6 @@ func ErrorBehavioral(executor LogicOperator) BehaviourExecutor {
 	}
 }
 
-func (k *errorBehaviour) Process(ctx context.Context, message *sarama.ConsumerMessage) error {
+func (k *errorBehaviour) Process(ctx context.Context, message *sarama.ConsumerMessage) (*sarama.ConsumerMessage, error) {
 	return k.executor.Operate(ctx, message)
 }
